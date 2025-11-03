@@ -13,9 +13,10 @@ import secrets
 # Prompt user for Client ID and Client Secret from Spotify App Dashboard
 CLIENT_ID = str(input("Please Enter the CLIENT ID: "))
 CLIENT_SECRET = str(input("Please Enter the CLIENT SECRET: "))
-
 # Redirect URI I entered when first making app in spotify dashboard
 REDIRECT_URI = 'http://127.0.0.1:3000'
+SCOPE = 'user-read-private user-read-email user-library-read user-personalized user-read-private'
+AUTH_URL = 'https://accounts.spotify.com/authorize'
 
 # Creating code verifier
 # A secure random string (43-128 chars)
@@ -32,22 +33,22 @@ def get_code_challenge(code_verifier):
     code_challenge = base64.urlsafe_b64encode(code_challenge).decode('utf-8').replace('=','')
     return code_challenge
 
-verifier = get_code_verifier()
-challenge = get_code_challenge(verifier)
-print(f'verifier: {verifier}')
-print(f'challenge: {challenge}')
+# Create OAuth Link 
+def create_oauth_link():
+    verifier = get_code_verifier()
+    challenge = get_code_challenge(code_verifier=verifier)
+    params = {
+        "client_id": CLIENT_ID,
+        "response_type": "code",
+        "redirect_uri": REDIRECT_URI,
+        "scope": SCOPE,
+        "code_challenge_method": "S256",
+        "code_challenge": challenge
+    }
+    response = requests.get(AUTH_URL, params=params)
+    return response.url
 
 
-
-# # Create OAuth Link 
-# def create_oauth_link():
-#     params = {
-#         "client_id": CLIENT_ID,
-#         "response_type": "code",
-#         "redirect_uri": REDIRECT_URI,
-#         "scope": 
-
-#     }
 
 # def get_token() -> dict:
 #     url = "https://accounts.spotify.com/api/token"
