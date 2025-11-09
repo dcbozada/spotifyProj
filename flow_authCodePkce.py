@@ -3,6 +3,7 @@ import json
 import base64
 import hashlib
 import secrets
+from urllib.parse import urlparse, parse_qs
 
 # Authorization Code with PKCE Flow
 # Code Challenge generation from a Code Verifier.
@@ -14,9 +15,20 @@ import secrets
 CLIENT_ID = str(input("Please Enter the CLIENT ID: "))
 CLIENT_SECRET = str(input("Please Enter the CLIENT SECRET: "))
 # Redirect URI I entered when first making app in spotify dashboard
-REDIRECT_URI = 'http://127.0.0.1:3000'
-SCOPE = 'user-read-private user-read-email user-library-read user-personalized user-read-private'
+REDIRECT_URI = 'http://127.0.0.1:8080'
+# Scopes of user data I want to use
+SCOPE = (
+    "user-read-private "
+    "user-read-email "
+    "user-library-read "
+    "user-top-read "
+    "playlist-read-private "
+    "playlist-read-collaborative "
+)
 AUTH_URL = 'https://accounts.spotify.com/authorize'
+API_URL = "https://accounts.spotify.com/api/token"
+
+
 
 # Creating code verifier
 # A secure random string (43-128 chars)
@@ -26,7 +38,7 @@ def get_code_verifier() -> str:
 
 # creating code challenge 
 # once code verifier is generated, hash is using SHA256 algorithim
-def get_code_challenge(code_verifier):
+def get_code_challenge(code_verifier) -> str:
     # calculate sha256 hash of the verifier
     code_challenge = hashlib.sha256(code_verifier.encode('utf-8')).digest()
     # base64-url encode the result 
@@ -34,7 +46,7 @@ def get_code_challenge(code_verifier):
     return code_challenge
 
 # Create OAuth Link 
-def create_oauth_link():
+def create_oauth_link() -> tuple[str,str]:
     verifier = get_code_verifier()
     challenge = get_code_challenge(code_verifier=verifier)
     params = {
@@ -45,8 +57,39 @@ def create_oauth_link():
         "code_challenge_method": "S256",
         "code_challenge": challenge
     }
-    response = requests.get(AUTH_URL, params=params)
-    return response.url
+    url = requests.Request('GET', AUTH_URL, params=params).prepare().url
+    return url, verifier
+
+def get_token(code_verifier: str) -> str:
+    redirect_url = input('Please copy/paste the redirect URL: ')
+    parsed_url = urlparse(redirect_url) # parse redirect url into sections
+    auth_code = parse_qs(parsed_url.query).get("code",[None])[0] #turn query parameters into a dict
+    payload = {
+        "grant_type":"authorization_code",
+        "code": auth_code,
+        "redirect_uri": REDIRECT_URI,
+        "client_id": CLIENT_ID,
+        "code_verifier": code_verifier
+    }
+    headers = {"Content-Type":"application/x-www-form-urlencoded"}
+    try:
+        response = requests.post(API_URL, data=payload, headers=headers) # post request to get access_token
+        if response.status_code != 200:
+            raise Exception(f"Token request failed: {response.text}")
+        token_data = response.json() # convert response.Response object to json so python reads as dict
+        return token_data['access_token'] # return the value in key 'access_token' of dict token_data
+    except Exception as e:
+        print("error in get_token()")
+
+def main():#
+    oauth_link, verifier = create_oauth_link()
+    print(f'Please use the below link to verify access to your Spotify data: \n\n {oauth_link}')
+    access_token = get_token(code_verifier=verifier)
+    print(f"Your access token is: {access_token}")
+    
+
+if __name__ == "__main__":
+    main()
 
 
 
