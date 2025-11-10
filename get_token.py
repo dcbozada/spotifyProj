@@ -81,15 +81,15 @@ def get_token(code_verifier: str) -> str:
     except Exception as e:
         print("error in get_token()")
 
-def main():#
-    oauth_link, verifier = create_oauth_link()
-    print(f'Please use the below link to verify access to your Spotify data: \n\n {oauth_link}')
-    access_token = get_token(code_verifier=verifier)
-    print(f"Your access token is: {access_token}")
+# def main():#
+#     oauth_link, verifier = create_oauth_link()
+#     print(f'Please use the below link to verify access to your Spotify data: \n\n {oauth_link}')
+#     access_token = get_token(code_verifier=verifier)
+#     print(f"Your access token is: {access_token}")
     
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
 
 
 
