@@ -12,6 +12,8 @@ def main():#
     
     my_tracks = requests.get(url, headers=headers)
     my_tracks = my_tracks.json()
+    with open("my_tracks.json", "w") as f:
+        json.dump(my_tracks, f, indent = 4)
     print(my_tracks)
 
 if __name__ == "__main__":
