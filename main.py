@@ -7,7 +7,7 @@ def main():#
     print(f"Please use following link to grant access to your Spotify data {oauth_link}")
     access_token = get_token(verifier)
     print(f"Your access token: {access_token}")
-    url = "https://api.spotify.com/v1/me/tracks?limit=5"
+    url = "https://api.spotify.com/v1/me/tracks?limit=50"
     headers={f"Authorization": f"Bearer {access_token}"}
     
     my_tracks = requests.get(url, headers=headers)

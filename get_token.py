@@ -29,7 +29,6 @@ AUTH_URL = 'https://accounts.spotify.com/authorize'
 API_URL = "https://accounts.spotify.com/api/token"
 
 
-
 # Creating code verifier
 # A secure random string (43-128 chars)
 def get_code_verifier() -> str:
