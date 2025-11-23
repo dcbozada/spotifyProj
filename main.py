@@ -28,6 +28,9 @@ def main():
 
     tracks_df = etl.jsonToDf()
     print(tracks_df)
+
+    # put into etl.py later
+    engine = create_engine("postgresql://wooli:dylan@localhost:5432/spotify")
     
 
 if __name__ == "__main__":
