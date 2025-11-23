@@ -1,6 +1,6 @@
 import pandas as pd #type:ignore
 import json
-from sqlalchemy import create_engine #type:ignore
+from sqlalchemy import create_engine, text #type:ignore
 
 class ETL():
     def __init__(self):
@@ -35,12 +35,12 @@ class ETL():
 def main():
     etl = ETL()
     tracks_df = etl.jsonToDf()
-    print(tracks_df)
 
     # connect to local postgres DB
     engine = create_engine("postgresql://dylan:wooli@localhost:5432/spotify")
 
-    tracks_df.to_sql("tracks", engine, if_exists="replace", index=False)
+
+    # tracks_df.to_sql("tracks", engine, if_exists="replace", index=False)
 
 
 
