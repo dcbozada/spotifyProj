@@ -76,8 +76,8 @@ class Token():
         payload = {
             "grant_type":"authorization_code",
             "code": auth_code,
-            "redirect_uri": REDIRECT_URI,
-            "client_id": CLIENT_ID,
+            "redirect_uri": self.redirect_uri,
+            "client_id": self.client_id,
             "code_verifier": code_verifier
         }
         headers = {"Content-Type":"application/x-www-form-urlencoded"}
