@@ -3,6 +3,11 @@ import json
 from get_token import Token
 from etl import ETL
 
+# setting json file names as global constants
+TRACKS = "tracks.json"
+ARTISTS = "artists.json"
+ALBUMS = "albums.json"
+
 def main():
     # create instances of necessary classes
     token = Token()
@@ -14,19 +19,15 @@ def main():
     access_token = token.get_token(verifier)
     print(f"Your access token: {access_token}")
 
-    # url is to get user 50 tracks from users liked songs playlists
-    url = "https://api.spotify.com/v1/me/tracks?limit=50"
+    # url is to get user 50 tracks from users liked songs playlists, only first 50
+    my_tracks_url = "https://api.spotify.com/v1/me/tracks?limit=50"
     headers={f"Authorization": f"Bearer {access_token}"}
     
     # request with GET and turn result into JSON
-    my_tracks = requests.get(url, headers=headers)
-    my_tracks = my_tracks.json()
-    # then dump my_tracks into a readable json file
-    with open("my_tracks.json", "w") as f:
-        # json.dump 
-        json.dump(my_tracks, f, indent = 4)
-
-    tracks_df = etl.jsonToDf()
+    result = requests.get(my_tracks_url, headers=headers)
+    tracks_df = etl.jsonToDf(file_name=TRACKS, proc_what='tracks',
+                             result=result)
+    print(tracks_df)
 
  
 if __name__ == "__main__":
