@@ -36,7 +36,7 @@ class ETL():
                     i:{
                         'track_id':tracks['items'][i]['track']['id'],
                         'track_name':tracks['items'][i]['track']['name'],
-                        'artist_id':tracks['items'][i]['track']['artists'][0]['name'],
+                        'artist_id':tracks['items'][i]['track']['artists'][0]['id'],
                         'album_id':tracks['items'][i]['track']['album']['id'],
                         'duration_ms':tracks['items'][i]['track']['duration_ms']
                     }

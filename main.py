@@ -29,6 +29,11 @@ def main():
                              result=result)
     print(tracks_df)
 
+    artist_ids = ""
+    for i in tracks_df.index:
+        artist_ids += f'{tracks_df.loc[i, 'artist_id']},'
+
+    print(artist_ids)
  
 if __name__ == "__main__":
     main()
