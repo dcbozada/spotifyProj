@@ -11,10 +11,13 @@ class ETL():
         # self.tracks_file_name = "tracks.json"
         self.tracks_dict = {}
         self.tracks_df = None
+        # for artists process
+        self.artists_dict = {}
+        self.artists_df = None
     
     # creating this writeJson func because I am going to use it a few times
     def w_result_to_json(self, result: requests.models.Response, file_name:str) -> str:
-        # turn the requests.models.Response to json
+        # turn the requests.models.Response to json so python reads as dict
         result = result.json()
         # write json'd result to file_name
         with open(file_name, 'w') as f:
@@ -24,7 +27,7 @@ class ETL():
     def jsonToDf(self, file_name:str, proc_what: str, result: requests.models.Response) -> pd.DataFrame:
         # first we are going to write the Response to json
         file_name = self.w_result_to_json(result=result, file_name=file_name)
-
+        # code that will process the tracks endpoints 
         if proc_what == 'tracks':
             # read the json file specified by file_name
             with open(file_name, 'r') as f:
@@ -34,17 +37,37 @@ class ETL():
             for i in range(len(tracks['items'])):
                 self.tracks_dict.update({
                     i:{
-                        'track_id':tracks['items'][i]['track']['id'],
-                        'track_name':tracks['items'][i]['track']['name'],
-                        'artist_id':tracks['items'][i]['track']['artists'][0]['id'],
-                        'album_id':tracks['items'][i]['track']['album']['id'],
-                        'duration_ms':tracks['items'][i]['track']['duration_ms']
+                        "track_id":tracks["items"][i]["track"]["id"],
+                        "track_name":tracks["items"][i]["track"]["name"],
+                        "artist_id":tracks["items"][i]["track"]["artists"][0]["id"],
+                        "album_id":tracks["items"][i]["track"]["album"]["id"],
+                        "duration_ms":tracks["items"][i]["track"]["duration_ms"]
                     }
                 })
             # turn self.tracks_dict into a dataframe
             # have to tranpose because the keys of each dict are originally the rows
             self.tracks_df = pd.DataFrame(self.tracks_dict).T
             return self.tracks_df
+        # code that will process the artists endpoint
+        elif proc_what == 'artists':
+            # read the json file specified my file_name
+            with open(file_name, 'r') as f:
+                artists = json.load(f)
+            # extract only the artist_id, artist_name, artist_genre,
+            # artist_follwers, artist_popularity
+            for i in range(len(artists['artists'])):
+                self.artists_dict.update({
+                    i:{
+                        "artist_id":artists["artists"][i]["id"],
+                        "artist_name":artists["artists"][i]["name"],
+                        "artist_genre":artists["artists"][i]["genres"][0],
+                        "artist_followers":artists["artists"][i]["followers"]["total"],
+                        "artist_popularity":artists["artists"][i]["popularity"]
+                    }
+                })
+            self.artists_df = pd.DataFrame(self.artists_dict).T
+            return self.artists_df
+
     
 # def main():
 #     etl = ETL()
