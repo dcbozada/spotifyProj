@@ -41,7 +41,8 @@ class ETL():
                         "track_name":tracks["items"][i]["track"]["name"],
                         "artist_id":tracks["items"][i]["track"]["artists"][0]["id"],
                         "album_id":tracks["items"][i]["track"]["album"]["id"],
-                        "duration_ms":tracks["items"][i]["track"]["duration_ms"]
+                        "duration_ms":tracks["items"][i]["track"]["duration_ms"],
+                        "added_at":tracks["items"][i]["added_at"]
                     }
                 })
             # turn self.tracks_dict into a dataframe
@@ -60,7 +61,7 @@ class ETL():
                     i:{
                         "artist_id":artists["artists"][i]["id"],
                         "artist_name":artists["artists"][i]["name"],
-                        "artist_genre":artists["artists"][i]["genres"][0],
+                        "artist_genre":(artists['artists'][i].get('genres') or ['No Genre Specified'])[0],
                         "artist_followers":artists["artists"][i]["followers"]["total"],
                         "artist_popularity":artists["artists"][i]["popularity"]
                     }
