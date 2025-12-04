@@ -46,6 +46,8 @@ def main():
                                result=result)
     for i in artists_df.columns:
         print(i)
+    for i in artists_df.index:
+        print(artists_df.loc[i, 'artist_genre'])
 
 
 
