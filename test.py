@@ -4,13 +4,16 @@ import requests
 from etl import ETL
 from get_token import Token
 
-TRACKS = "tracks.json"
 
 etl = ETL()
 token = Token()
 
-access_token = token.get_access_token()
-print(access_token)
+print(token.client_id)
+print(token.redirect_uri)
+print(token.auth_url)
+print(token.api_url)
+
+access_token = token.get_token()
 
 # # headers dictionary I will be using when making GET requests to api endpoints
 # headers={f"Authorization": f"Bearer {access_token}"}

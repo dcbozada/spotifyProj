@@ -1,4 +1,6 @@
-import requests # type: ignore
+import os
+import dotenv #type:ignore
+import requests # type:ignore
 import json 
 import base64
 import hashlib
@@ -11,15 +13,14 @@ from urllib.parse import urlparse, parse_qs
 # Request an access token from the authorization code.
 # Finally, use the access token to make API calls.
 
-# setting json file names as global constants
-TOKEN_DATA = "token_data.json"
+# load the enviroment variables using dotenv.find_dontenv(), then dotenv.load_dotenv() then os.getenv()
+dotenv_file = dotenv.find_dotenv()
+dotenv.load_dotenv(dotenv_file)
+CLIENT_ID = os.getenv("CLIENT_ID")
+REDIRECT_URI = os.getenv("REDIRECT_URI")
+AUTH_URL = os.getenv("AUTH_URL")
+API_URL = os.getenv("API_TOKEN_URL")
 
-# Prompt user for Client ID and Client Secret from Spotify App 
-# CLIENT_ID = str(input("Please Enter the CLIENT ID: "))
-# CLIENT_SECRET = str(input("\nPlease Enter the CLIENT SECRET: "))
-CLIENT_ID = '44d1c0de599041cc84c7ea5a19f22e2e'
-# Redirect URI I entered when first making app in spotify dashboard
-REDIRECT_URI = 'http://127.0.0.1:8080'
 # Scopes of user data I want to use
 SCOPE = (
     "user-read-private "
@@ -29,8 +30,6 @@ SCOPE = (
     "playlist-read-private "
     "playlist-read-collaborative "
 )
-AUTH_URL = 'https://accounts.spotify.com/authorize'
-API_URL = "https://accounts.spotify.com/api/token"
 
 class Token():
 
@@ -42,10 +41,10 @@ class Token():
         self.auth_url = AUTH_URL
         self.api_url = API_URL
 
-    def get_access_token(self) -> str:
-        with open(TOKEN_DATA, 'r') as f:
-            token_data = json.load(f)
-        return token_data['access_token']
+    # def get_access_token(self) -> str:
+    #     with open(TOKEN_DATA, 'r') as f:
+    #         token_data = json.load(f)
+    #     return token_data['access_token']
 
     # Creating code verifier
     # A secure random string (43-128 chars)
@@ -77,7 +76,12 @@ class Token():
         url = requests.Request('GET', self.auth_url, params=params).prepare().url
         return url, verifier
 
-    def get_token(self, code_verifier: str) -> str:
+    def get_token(self) -> str:
+        # create the ouath link and get verifier by calling the Token() class' create_oauth_link()
+        oauth_link, verifier = self.create_oauth_link()
+        print(f"\nPlease use following link to grant access to your Spotify data: {oauth_link}")
+
+        # user will copy and paste the URL created after authentication through oauth_link
         redirect_url = input('\nPlease copy/paste the redirect URL: ')
         parsed_url = urlparse(redirect_url) # parse redirect url into sections
         auth_code = parse_qs(parsed_url.query).get("code",[None])[0] #turn query parameters into a dict
@@ -86,7 +90,7 @@ class Token():
             "code": auth_code,
             "redirect_uri": self.redirect_uri,
             "client_id": self.client_id,
-            "code_verifier": code_verifier
+            "code_verifier": verifier
         }
         headers = {"Content-Type":"application/x-www-form-urlencoded"}
         try:
@@ -94,9 +98,12 @@ class Token():
             if response.status_code != 200:
                 raise Exception(f"Token request failed: {response.text}")
             token_data = response.json() # convert response.Response object to json so python reads as dict
-            return token_data['access_token'] # return the value in key 'access_token' of dict token_data
+            # write the newly generated access_token and refresh_token to .env file
+            dotenv.set_key(dotenv_file, "ACCESS_TOKEN", token_data["access_token"])
+            dotenv.set_key(dotenv_file, "REFRESH_TOKEN", token_data["refresh_token"])
+            return  os.getenv("ACCESS_TOKEN") # return the value in key 'access_token' of dict token_data
         except Exception as e:
-            print("error in get_token()")
+            print("error in requests to get access token and refresh toek")
 
 # def main():#
 #     oauth_link, verifier = create_oauth_link()
