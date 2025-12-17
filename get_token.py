@@ -11,9 +11,13 @@ from urllib.parse import urlparse, parse_qs
 # Request an access token from the authorization code.
 # Finally, use the access token to make API calls.
 
-# Prompt user for Client ID and Client Secret from Spotify App Dashboard
-CLIENT_ID = str(input("Please Enter the CLIENT ID: "))
-CLIENT_SECRET = str(input("Please Enter the CLIENT SECRET: "))
+# setting json file names as global constants
+TOKEN_DATA = "token_data.json"
+
+# Prompt user for Client ID and Client Secret from Spotify App 
+# CLIENT_ID = str(input("Please Enter the CLIENT ID: "))
+# CLIENT_SECRET = str(input("\nPlease Enter the CLIENT SECRET: "))
+CLIENT_ID = '44d1c0de599041cc84c7ea5a19f22e2e'
 # Redirect URI I entered when first making app in spotify dashboard
 REDIRECT_URI = 'http://127.0.0.1:8080'
 # Scopes of user data I want to use
@@ -32,12 +36,16 @@ class Token():
 
     def __init__(self):
         self.client_id = CLIENT_ID
-        self.client_secret = CLIENT_SECRET
+        # self.client_secret = CLIENT_SECRET
         self.scope = SCOPE
         self.redirect_uri = REDIRECT_URI
         self.auth_url = AUTH_URL
         self.api_url = API_URL
 
+    def get_access_token(self) -> str:
+        with open(TOKEN_DATA, 'r') as f:
+            token_data = json.load(f)
+        return token_data['access_token']
 
     # Creating code verifier
     # A secure random string (43-128 chars)
@@ -70,7 +78,7 @@ class Token():
         return url, verifier
 
     def get_token(self, code_verifier: str) -> str:
-        redirect_url = input('Please copy/paste the redirect URL: ')
+        redirect_url = input('\nPlease copy/paste the redirect URL: ')
         parsed_url = urlparse(redirect_url) # parse redirect url into sections
         auth_code = parse_qs(parsed_url.query).get("code",[None])[0] #turn query parameters into a dict
         payload = {

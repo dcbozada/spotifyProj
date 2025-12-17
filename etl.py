@@ -6,7 +6,7 @@ import requests #type:ignore
 class ETL():    
     def __init__(self):
         # right off bat, making ETL class connect to database
-        self.engine = create_engine("postgresql://dylan:wooli@localhost:5432/spotify  ")
+        # self.engine = create_engine("postgresql://dylan:wooli@localhost:5432/spotify  ")
         # for tracks processing
         # self.tracks_file_name = "tracks.json"
         self.tracks_dict = {}
@@ -61,7 +61,7 @@ class ETL():
                     i:{
                         "artist_id":artists["artists"][i]["id"],
                         "artist_name":artists["artists"][i]["name"],
-                        "artist_genre":(artists['artists'][i].get('genres') or ['No Genre Specified'])[0],
+                        "artist_genre":(artists['artists'][i].get('genres') or ['no genre specified'])[0],
                         "artist_followers":artists["artists"][i]["followers"]["total"],
                         "artist_popularity":artists["artists"][i]["popularity"]
                     }
