@@ -34,15 +34,15 @@ class ETL():
                 tracks = json.load(f)
             # extract only the track_id, track_name, artist_id, album_id, 
             # and duration_ms from json file and put it into self.tracks_dict
-            for i in range(len(tracks['items'])):
+            for idx, item in enumerate(tracks.get("items", [])):
                 self.tracks_dict.update({
-                    i:{
-                        "track_id":tracks["items"][i]["track"]["id"],
-                        "track_name":tracks["items"][i]["track"]["name"],
-                        "artist_id":tracks["items"][i]["track"]["artists"][0]["id"],
-                        "album_id":tracks["items"][i]["track"]["album"]["id"],
-                        "duration_ms":tracks["items"][i]["track"]["duration_ms"],
-                        "added_at":tracks["items"][i]["added_at"]
+                    idx:{
+                        "track_id":item["track"].get("id"),
+                        "track_name":item["track"].get("name"),
+                        "artist_id":item["track"]["artists"][0].get("id"),
+                        "album_id":item["track"]["album"].get("id"),
+                        "duration_ms":item["track"].get("duration_ms"),
+                        "added_at":item.get("added_at")
                     }
                 })
             # turn self.tracks_dict into a dataframe
@@ -56,14 +56,14 @@ class ETL():
                 artists = json.load(f)
             # extract only the artist_id, artist_name, artist_genre,
             # artist_follwers, artist_popularity
-            for i in range(len(artists['artists'])):
+            for idx, item in enumerate(artists.get("artists",[])):
                 self.artists_dict.update({
-                    i:{
-                        "artist_id":artists["artists"][i]["id"],
-                        "artist_name":artists["artists"][i]["name"],
-                        "artist_genre":(artists['artists'][i].get('genres') or ['no genre specified'])[0],
-                        "artist_followers":artists["artists"][i]["followers"]["total"],
-                        "artist_popularity":artists["artists"][i]["popularity"]
+                    idx:{
+                        "artist_id":item.get("id"),
+                        "artist_name":item.get("name"),
+                        "artist_genre":(item.get('genres') or ['no genre specified'])[0],
+                        "artist_followers":item["followers"].get("total"),
+                        "artist_popularity":item.get("popularity")
                     }
                 })
             self.artists_df = pd.DataFrame(self.artists_dict).T
