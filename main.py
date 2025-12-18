@@ -27,7 +27,9 @@ def main():
     tracks_df = etl.jsonToDf(file_name=TRACKS, proc_what='tracks',
                              result=result)
     for i in tracks_df.columns:
-        print(i)
+        print(tracks_df[i].head())
+
+    # print(tracks_df)
 
     # empty string to append to for when I pull multiple artists
     artist_ids = ""
@@ -35,6 +37,7 @@ def main():
         artist_ids += f'{tracks_df.loc[i, 'artist_id']},'
     # seting string to exclude the last character(it ends with a comma)
     artist_ids = artist_ids[:-1]
+    print(artist_ids)
     
     # request artists info with GET and turn results into JSON
     artist_url = f"https://api.spotify.com/v1/artists?ids={artist_ids}"
@@ -42,9 +45,7 @@ def main():
     artists_df = etl.jsonToDf(file_name = ARTISTS, proc_what='artists',
                                result=result)
     for i in artists_df.columns:
-        print(i)
-    for i in artists_df.index:
-        print(artists_df.loc[i, 'artist_genre'])
+        print(artists_df[i].head())
 
 
 
