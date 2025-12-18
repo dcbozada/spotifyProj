@@ -7,18 +7,14 @@ from etl import ETL
 TRACKS = "tracks.json"
 ARTISTS = "artists.json"
 ALBUMS = "albums.json"
-TOKEN_DATA = "token_data.json"
 
 def main():
     # create instances of necessary classes
     token = Token()
     etl = ETL()
 
-    # create oauth link and get verifier 
-    oauth_link, verifier = token.create_oauth_link()
-    print(f"Please use following link to grant access to your Spotify data {oauth_link}")
-    access_token = token.get_token(verifier)
-    print(f"\nYour access token: {access_token}")
+    access_token = token.get_token()
+    print(f"\nYour Access Token is: {access_token}")
 
     # headers dictionary I will be using when making GET requests to api endpoints
     headers={f"Authorization": f"Bearer {access_token}"}
