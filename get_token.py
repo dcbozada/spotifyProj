@@ -19,7 +19,9 @@ dotenv.load_dotenv(dotenv_file)
 CLIENT_ID = os.getenv("CLIENT_ID")
 REDIRECT_URI = os.getenv("REDIRECT_URI")
 AUTH_URL = os.getenv("AUTH_URL")
-API_URL = os.getenv("API_TOKEN_URL")
+API_TOKEN_URL = os.getenv("API_TOKEN_URL")
+ACCESS_TOKEN = os.getenv("ACCESS_TOKEN")
+REFRESH_TOKEN = os.getenv("REFRESH_TOKEN")
 
 # Scopes of user data I want to use
 SCOPE = (
@@ -39,12 +41,28 @@ class Token():
         self.scope = SCOPE
         self.redirect_uri = REDIRECT_URI
         self.auth_url = AUTH_URL
-        self.api_url = API_URL
+        self.api_token_url = API_TOKEN_URL
+        self.access_token = ACCESS_TOKEN
+        self.refresh_token = REFRESH_TOKEN
 
-    # def get_access_token(self) -> str:
-    #     with open(TOKEN_DATA, 'r') as f:
-    #         token_data = json.load(f)
-    #     return token_data['access_token']
+    def get_token(self) -> str:
+        # if the access token doesn't exist in .env, we create a new one
+        if self.access_token is None:
+            print("Access Token Does Not Exist, Creating New One")
+            self.access_token = self.get_access_token()
+            return self.access_token
+    
+        if self.access_token != None:
+            # testing if current .env ACCESS_TOKEN is valid
+            test_url = 'https://api.spotify.com/v1/me'
+            headers = {f"Authorization": f"Bearer {self.access_token}"}
+            response = requests.get(test_url, headers=headers)
+            if response.status_code == 401:
+                print("Generating Refresh Token")
+                self.access_token = self.get_refresh_token()
+                return self.access_token
+            else:
+                return self.access_token
 
     # Creating code verifier
     # A secure random string (43-128 chars)
@@ -76,7 +94,7 @@ class Token():
         url = requests.Request('GET', self.auth_url, params=params).prepare().url
         return url, verifier
 
-    def get_token(self) -> str:
+    def get_access_token(self) -> str:
         # create the ouath link and get verifier by calling the Token() class' create_oauth_link()
         oauth_link, verifier = self.create_oauth_link()
         print(f"\nPlease use following link to grant access to your Spotify data: {oauth_link}")
@@ -94,16 +112,49 @@ class Token():
         }
         headers = {"Content-Type":"application/x-www-form-urlencoded"}
         try:
-            response = requests.post(self.api_url, data=payload, headers=headers) # post request to get access_token
+            response = requests.post(self.api_token_url, data=payload, headers=headers) # post request to get access_token
             if response.status_code != 200:
-                raise Exception(f"Token request failed: {response.text}")
+                raise Exception(f"\nAccess Token Request Failed: {response.text}")
             token_data = response.json() # convert response.Response object to json so python reads as dict
             # write the newly generated access_token and refresh_token to .env file
             dotenv.set_key(dotenv_file, "ACCESS_TOKEN", token_data["access_token"])
             dotenv.set_key(dotenv_file, "REFRESH_TOKEN", token_data["refresh_token"])
-            return  os.getenv("ACCESS_TOKEN") # return the value in key 'access_token' of dict token_data
+            print('From get_access_token(): ACCESS_TOKEN and REFRESH_TOKEN updated in .env')
+            # write the newly generated access_token and refresh_token to instance token vars
+            # self.access_token = token_data["access_token"]
+            self.refresh_token = token_data["refresh_token"]
+            return token_data["access_token"]
         except Exception as e:
-            print("error in requests to get access token and refresh toek")
+            print("error in get_access_token(): {e}")
+
+    # function to refresh the access token
+    def get_refresh_token(self) -> str:
+        # payload necessary to post for refresh token
+        payload = {
+            "grant_type" : "refresh_token",
+            "refresh_token": self.refresh_token,
+            "client_id": self.client_id,
+        }
+        headers = {"Content-Type": "application/x-www-form-urlencoded"}
+        try:
+            response = requests.post(self.api_token_url, data=payload, headers=headers)
+            if response.status_code != 200:
+                raise Exception(f"\nRefresh Token Request Failed: {response.text}")
+            token_data = response.json() # convert response.Response object to json so python reads as dict
+            # write the newly generated access_token and refresh_token to .env file
+            dotenv.set_key(dotenv_file, "ACCESS_TOKEN", token_data["access_token"])
+            dotenv.set_key(dotenv_file, "REFRESH_TOKEN", token_data["refresh_token"])
+            print('From get_refresh_token(): ACCESS_TOKEN and REFRESH_TOKEN updated in .env')
+            # write the newly generated access_token and refresh_token to instance token vars
+            # self.access_token = token_data["access_token"]
+            self.refresh_token = token_data["refresh_token"]
+            return token_data["access_token"]
+        except Exception as e:
+            print(f"\nRefresh Token Request Failed: {e}")
+
+
+
+
 
 # def main():#
 #     oauth_link, verifier = create_oauth_link()
