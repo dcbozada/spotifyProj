@@ -7,6 +7,9 @@ class ETL():
     def __init__(self):
         # right off bat, making ETL class connect to database
         # self.engine = create_engine("postgresql://dylan:wooli@localhost:5432/spotify  ")
+        # for listening history processing
+        self.history_dict = {}
+        self.history_df = None
         # for tracks processing
         # self.tracks_file_name = "tracks.json"
         self.tracks_dict = {}
@@ -16,6 +19,8 @@ class ETL():
         self.artists_df = None
     
     # creating this writeJson func because I am going to use it a few times
+    ''' Never call to this directly in main()
+       it is embedded into jsonToDF() '''
     def w_result_to_json(self, result: requests.models.Response, file_name:str) -> str:
         # turn the requests.models.Response to json so python reads as dict
         result = result.json()
@@ -27,8 +32,26 @@ class ETL():
     def jsonToDf(self, file_name:str, proc_what: str, result: requests.models.Response) -> pd.DataFrame:
         # first we are going to write the Response to json
         file_name = self.w_result_to_json(result=result, file_name=file_name)
+        # code that will process the listening history end point
+        if proc_what == 'history':
+            with open(file_name, 'r') as f:
+                history = json.load(f)
+            # extract track_uri, track_id, played_at, context_type, context_uri
+            self.history_dict = {
+                idx: {
+                    "id":item["track"].get("uri"),
+                    "track_id":item["track"].get("id"),
+                    "played_at":item.get("played_at"),
+                    "context_type":item["context"].get("type"),
+                    "context_uri":item["context"].get("uri")
+                }
+                for idx,item in enumerate(history.get("items",[]))
+            }
+            # turn history_dict into history_df
+            self.history_df = pd.DataFrame(self.history_dict).T
+            return self.history_df
         # code that will process the tracks endpoints 
-        if proc_what == 'tracks':
+        elif proc_what == 'tracks':
             # read the json file specified by file_name
             with open(file_name, 'r') as f:
                 tracks = json.load(f)

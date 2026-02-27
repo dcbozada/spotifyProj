@@ -4,6 +4,7 @@ from get_token import Token
 from etl import ETL
 
 # setting json file names as global constants
+HISTORY = "listening_history.json"
 TRACKS = "tracks.json"
 ARTISTS = "artists.json"
 ALBUMS = "albums.json"
@@ -19,6 +20,17 @@ def main():
     # headers dictionary I will be using when making GET requests to api endpoints
     headers={f"Authorization": f"Bearer {access_token}"}
 
+    # url is to get users 50 most recently listed to tracks - the engine of database
+    listening_history_url = "https://api.spotify.com/v1/me/player/recently-played?limit=50"
+
+
+    # request listening info with GET and turn result in JSON
+    result = requests.get(listening_history_url, headers=headers)
+    history_df = etl.jsonToDf(file_name=HISTORY, proc_what='history',
+                              result=result)
+    print(history_df.head())
+
+
     # url is to get user 50 tracks from users liked songs playlists, only first 50
     my_tracks_url = "https://api.spotify.com/v1/me/tracks?limit=50"
     
@@ -26,8 +38,7 @@ def main():
     result = requests.get(my_tracks_url, headers=headers)
     tracks_df = etl.jsonToDf(file_name=TRACKS, proc_what='tracks',
                              result=result)
-    for i in tracks_df.columns:
-        print(tracks_df[i].head())
+    print(tracks_df.head())
 
     # print(tracks_df)
 
@@ -44,8 +55,7 @@ def main():
     result = requests.get(artist_url, headers=headers)
     artists_df = etl.jsonToDf(file_name = ARTISTS, proc_what='artists',
                                result=result)
-    for i in artists_df.columns:
-        print(artists_df[i].head())
+    print(artists_df.head())
 
 
 
