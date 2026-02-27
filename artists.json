@@ -6,7 +6,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 9307341
+                "total": 9310179
             },
             "genres": [
                 "emo rap",
@@ -35,7 +35,46 @@
                 }
             ],
             "name": "$uicideboy$",
-            "popularity": 82,
+            "popularity": 83,
+            "type": "artist",
+            "uri": "spotify:artist:1VPmR4DJC1PlOtd0IADAO0"
+        },
+        {
+            "external_urls": {
+                "spotify": "https://open.spotify.com/artist/1VPmR4DJC1PlOtd0IADAO0"
+            },
+            "followers": {
+                "href": null,
+                "total": 9310179
+            },
+            "genres": [
+                "emo rap",
+                "horrorcore",
+                "cloud rap",
+                "trap metal",
+                "underground hip hop"
+            ],
+            "href": "https://api.spotify.com/v1/artists/1VPmR4DJC1PlOtd0IADAO0",
+            "id": "1VPmR4DJC1PlOtd0IADAO0",
+            "images": [
+                {
+                    "url": "https://i.scdn.co/image/ab6761610000e5ebc4817922f21a5f2a36e12bf2",
+                    "height": 640,
+                    "width": 640
+                },
+                {
+                    "url": "https://i.scdn.co/image/ab67616100005174c4817922f21a5f2a36e12bf2",
+                    "height": 320,
+                    "width": 320
+                },
+                {
+                    "url": "https://i.scdn.co/image/ab6761610000f178c4817922f21a5f2a36e12bf2",
+                    "height": 160,
+                    "width": 160
+                }
+            ],
+            "name": "$uicideboy$",
+            "popularity": 83,
             "type": "artist",
             "uri": "spotify:artist:1VPmR4DJC1PlOtd0IADAO0"
         },
@@ -45,7 +84,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 19168
+                "total": 19267
             },
             "genres": [],
             "href": "https://api.spotify.com/v1/artists/7ig7r3UikvL9qJe7pQvCBn",
@@ -78,7 +117,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 2213626
+                "total": 2214934
             },
             "genres": [],
             "href": "https://api.spotify.com/v1/artists/6zO1dZ40fTZ5hY9NnnRJSk",
@@ -111,7 +150,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 136488
+                "total": 136657
             },
             "genres": [
                 "bass music"
@@ -146,7 +185,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 230411
+                "total": 230427
             },
             "genres": [
                 "future bass"
@@ -181,7 +220,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 29572
+                "total": 29630
             },
             "genres": [],
             "href": "https://api.spotify.com/v1/artists/6dtbK89qIT2XjIsCQHjTxS",
@@ -214,7 +253,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 1987475
+                "total": 1987909
             },
             "genres": [
                 "retro soul"
@@ -249,7 +288,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 193746
+                "total": 193923
             },
             "genres": [
                 "soundtrack",
@@ -276,7 +315,7 @@
                 }
             ],
             "name": "Kyle Dixon & Michael Stein",
-            "popularity": 63,
+            "popularity": 62,
             "type": "artist",
             "uri": "spotify:artist:00oL7zWxmWveTsKF7DnIRd"
         },
@@ -286,7 +325,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 140182
+                "total": 140214
             },
             "genres": [
                 "dubstep",
@@ -324,7 +363,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 2464287
+                "total": 2465902
             },
             "genres": [
                 "stutter house",
@@ -361,7 +400,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 337033
+                "total": 337465
             },
             "genres": [
                 "stutter house"
@@ -396,7 +435,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 665167
+                "total": 665961
             },
             "genres": [
                 "house",
@@ -432,7 +471,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 2157372
+                "total": 2158199
             },
             "genres": [
                 "yacht rock",
@@ -469,7 +508,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 2193183
+                "total": 2193644
             },
             "genres": [
                 "new jack swing",
@@ -511,7 +550,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 5872
+                "total": 5887
             },
             "genres": [
                 "riddim",
@@ -549,7 +588,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 5872
+                "total": 5887
             },
             "genres": [
                 "riddim",
@@ -587,7 +626,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 5872
+                "total": 5887
             },
             "genres": [
                 "riddim",
@@ -625,7 +664,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 5872
+                "total": 5887
             },
             "genres": [
                 "riddim",
@@ -663,7 +702,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 1776
+                "total": 1781
             },
             "genres": [
                 "riddim",
@@ -699,7 +738,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 85300
+                "total": 85396
             },
             "genres": [
                 "stutter house"
@@ -734,7 +773,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 11205
+                "total": 11213
             },
             "genres": [
                 "dubstep",
@@ -773,7 +812,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 2464287
+                "total": 2465902
             },
             "genres": [
                 "stutter house",
@@ -810,7 +849,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 15091
+                "total": 15107
             },
             "genres": [],
             "href": "https://api.spotify.com/v1/artists/7jpG13xu7wCcAixo3DuOvD",
@@ -876,7 +915,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 289934
+                "total": 290004
             },
             "genres": [],
             "href": "https://api.spotify.com/v1/artists/7CzURHjIfP0ClUnjVRyF1i",
@@ -909,7 +948,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 779647
+                "total": 780142
             },
             "genres": [],
             "href": "https://api.spotify.com/v1/artists/0lJlKQvuM2Sd9DPPyUXcHg",
@@ -942,7 +981,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 13373373
+                "total": 13378201
             },
             "genres": [
                 "old school hip hop",
@@ -985,7 +1024,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 98006
+                "total": 98067
             },
             "genres": [],
             "href": "https://api.spotify.com/v1/artists/1He0ZKninbT4FMEV9hUZKn",
@@ -1018,7 +1057,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 289934
+                "total": 290004
             },
             "genres": [],
             "href": "https://api.spotify.com/v1/artists/7CzURHjIfP0ClUnjVRyF1i",
@@ -1051,7 +1090,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 72988
+                "total": 73001
             },
             "genres": [
                 "neo-psychedelic",
@@ -1089,7 +1128,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 53352
+                "total": 53380
             },
             "genres": [
                 "doo-wop"
@@ -1124,7 +1163,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 35330
+                "total": 35357
             },
             "genres": [
                 "riddim",
@@ -1161,7 +1200,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 337033
+                "total": 337465
             },
             "genres": [
                 "stutter house"
@@ -1196,7 +1235,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 676459
+                "total": 676569
             },
             "genres": [
                 "dubstep",
@@ -1249,7 +1288,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 464682
+                "total": 464877
             },
             "genres": [
                 "riddim",
@@ -1289,7 +1328,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 22060
+                "total": 22070
             },
             "genres": [
                 "bass music"
@@ -1324,7 +1363,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 24763
+                "total": 24782
             },
             "genres": [],
             "href": "https://api.spotify.com/v1/artists/6F7DcdohhC72MYZn4k0wZ9",
@@ -1357,7 +1396,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 529396
+                "total": 529559
             },
             "genres": [
                 "dubstep",
@@ -1393,7 +1432,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 41067
+                "total": 41075
             },
             "genres": [
                 "french house",
@@ -1431,7 +1470,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 24418
+                "total": 24446
             },
             "genres": [
                 "dubstep",
@@ -1468,7 +1507,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 23845
+                "total": 23890
             },
             "genres": [
                 "uk garage",
@@ -1504,7 +1543,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 36648
+                "total": 36657
             },
             "genres": [],
             "href": "https://api.spotify.com/v1/artists/0FIRQJT2PBffTJEZvipVi2",
@@ -1537,7 +1576,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 12790
+                "total": 12815
             },
             "genres": [
                 "dubstep",
@@ -1573,7 +1612,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 23845
+                "total": 23890
             },
             "genres": [
                 "uk garage",
@@ -1609,7 +1648,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 1236377
+                "total": 1236886
             },
             "genres": [
                 "reggae rock",
@@ -1646,7 +1685,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 15296
+                "total": 15335
             },
             "genres": [
                 "drum and bass",
@@ -1682,7 +1721,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 1550573
+                "total": 1551638
             },
             "genres": [],
             "href": "https://api.spotify.com/v1/artists/5GGJosGMs08YEmKTZJe1fL",
@@ -1715,7 +1754,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 123489165
+                "total": 123526049
             },
             "genres": [],
             "href": "https://api.spotify.com/v1/artists/6qqNVTkY8uBg9cP3Jd7DAH",
@@ -1741,39 +1780,6 @@
             "popularity": 90,
             "type": "artist",
             "uri": "spotify:artist:6qqNVTkY8uBg9cP3Jd7DAH"
-        },
-        {
-            "external_urls": {
-                "spotify": "https://open.spotify.com/artist/5ZTPO2c4BmAwr7Swe0qRQc"
-            },
-            "followers": {
-                "href": null,
-                "total": 57556
-            },
-            "genres": [],
-            "href": "https://api.spotify.com/v1/artists/5ZTPO2c4BmAwr7Swe0qRQc",
-            "id": "5ZTPO2c4BmAwr7Swe0qRQc",
-            "images": [
-                {
-                    "url": "https://i.scdn.co/image/ab6761610000e5ebc345a61dc3e3986e23414098",
-                    "height": 640,
-                    "width": 640
-                },
-                {
-                    "url": "https://i.scdn.co/image/ab67616100005174c345a61dc3e3986e23414098",
-                    "height": 320,
-                    "width": 320
-                },
-                {
-                    "url": "https://i.scdn.co/image/ab6761610000f178c345a61dc3e3986e23414098",
-                    "height": 160,
-                    "width": 160
-                }
-            ],
-            "name": "Rattlesnake Milk",
-            "popularity": 49,
-            "type": "artist",
-            "uri": "spotify:artist:5ZTPO2c4BmAwr7Swe0qRQc"
         }
     ]
 }
