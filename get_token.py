@@ -31,7 +31,7 @@ SCOPE = (
     "user-top-read "
     "playlist-read-private "
     "playlist-read-collaborative "
-    "user-read-recently-played "
+    "user-read-recently-played"
 )
 
 class Token():

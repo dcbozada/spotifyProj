@@ -39,13 +39,13 @@ class ETL():
             # extract track_uri, track_id, played_at, context_type, context_uri
             self.history_dict = {
                 idx: {
-                    "id":item["track"].get("uri"),
-                    "track_id":item["track"].get("id"),
-                    "played_at":item.get("played_at"),
-                    "context_type":item["context"].get("type"),
-                    "context_uri":item["context"].get("uri")
+                    "id": (item.get("track") or {}).get("uri", "n/a"),
+                    "track_id": (item.get("track") or {}).get("id", "n/a"),
+                    "played_at": item.get("played_at", "n/a"),
+                    "context_type": (item.get("context") or {}).get("type", "n/a"),
+                    "context_uri": (item.get("context") or {}).get("uri", "n/a")
                 }
-                for idx,item in enumerate(history.get("items",[]))
+                for idx,item in enumerate(history.get("items") or [])
             }
             # turn history_dict into history_df
             self.history_df = pd.DataFrame(self.history_dict).T
@@ -59,14 +59,14 @@ class ETL():
             # and duration_ms from json file and put it into self.tracks_dict
             self.tracks_dict = {
                 idx: {
-                    "track_id":item["track"].get("id"),
-                    "track_name":item["track"].get("name"),
-                    "artist_id":item["track"]["artists"][0].get("id"),
-                    "album_id":item["track"]["album"].get("id"),
-                    "duration_ms":item["track"].get("duration_ms"),
-                    "added_at":item.get("added_at")
+                    "track_id": (item.get("track") or {}).get("id", "n/a"),
+                    "track_name": (item.get("track") or {}).get("name", "n/a"),
+                    "artist_id": ((item.get("track") or {}).get("artists") or [{}])[0].get("id", "n/a"),
+                    "album_id": ((item.get("track") or {}).get("album") or {}).get("id", "n/a"),
+                    "duration_ms": (item.get("track") or {}).get("duration_ms", "n/a"),
+                    "added_at": item.get("added_at", "n/a")
                 }
-                for idx, item in enumerate(tracks.get("items", []))
+                for idx, item in enumerate(tracks.get("items") or [])
             }
             # turn self.tracks_dict into a dataframe
             # have to tranpose because the keys of each dict are originally the rows
@@ -81,13 +81,13 @@ class ETL():
             # artist_follwers, artist_popularity
             self.artists_dict = {
                 idx: {
-                    "artist_id":item.get("id"),
-                    "artist_name":item.get("name"),
-                    "artist_genre":(item.get('genres') or ['no genre specified'])[0],
-                    "artist_followers":item["followers"].get("total"),
-                    "artist_popularity":item.get("popularity")
+                    "artist_id": item.get("id", "n/a"),
+                    "artist_name": item.get("name", "n/a"),
+                    "artist_genre": (item.get("genres") or ["n/a"])[0],
+                    "artist_followers": (item.get("followers") or {}).get("total", "n/a"),
+                    "artist_popularity": item.get("popularity", "n/a")
                 }
-                for idx,item in enumerate(artists.get("artists", []))
+                for idx,item in enumerate(artists.get("artists") or [])
             }
             print(f"\n\nFrom jsonToDf proc_what==artists: artists.get('artists', []) is {type(artists.get('artists', []))}\n\n")
             self.artists_df = pd.DataFrame(self.artists_dict).T
