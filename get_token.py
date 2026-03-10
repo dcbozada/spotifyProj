@@ -126,7 +126,7 @@ class Token():
             self.refresh_token = token_data["refresh_token"]
             return token_data["access_token"]
         except Exception as e:
-            print("error in get_access_token(): {e}")
+            print(f"error in get_access_token(): {e}")
 
     # function to refresh the access token
     def get_refresh_token(self) -> str:
