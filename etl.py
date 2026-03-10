@@ -17,6 +17,9 @@ class ETL():
         # for artists process
         self.artists_dict = {}
         self.artists_df = None
+        # for albumbs process
+        self.albums_dict = {}
+        self.albums_df = None
     
     # creating this writeJson func because I am going to use it a few times
     ''' Never call to this directly in main()
@@ -74,7 +77,7 @@ class ETL():
             return self.tracks_df
         # code that will process the artists endpoint
         elif proc_what == 'artists':
-            # read the json file specified my file_name
+            # read the json file specified by file_name
             with open(file_name, 'r') as f:
                 artists = json.load(f)
             # extract only the artist_id, artist_name, artist_genre,
@@ -89,9 +92,30 @@ class ETL():
                 }
                 for idx,item in enumerate(artists.get("artists") or [])
             }
-            print(f"\n\nFrom jsonToDf proc_what==artists: artists.get('artists', []) is {type(artists.get('artists', []))}\n\n")
             self.artists_df = pd.DataFrame(self.artists_dict).T
             return self.artists_df
+        # code to process albums
+        elif proc_what == 'albums':
+            # open file specified with file_name
+            with open(file_name, 'r') as f:
+                albums = json.load(f)
+            # extract only the album_id, name,
+            # release_date, album_type, total_tracks, 
+            # image_url
+            self.albums_dict = {
+                idx: {
+                    "album_id":item.get("id","n/a"),
+                    "name":item.get("name","n/a"),
+                    "release_date":item.get("release_date","n/a"),
+                    "album_type":item.get("album_type","n/a"),
+                    "total_tracks":item.get("total_tracks","n/a"),
+                    "image_url":(item.get("images") or ["n/a"])[0].get("url","n/a")
+                }
+                for idx, item in enumerate(albums.get("albums") or [])
+            }
+            self.albums_df = pd.DataFrame(self.albums_dict).T
+            return self.albums_df
+
 
     
 # def main():
