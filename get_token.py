@@ -1,7 +1,6 @@
 import os
 import dotenv #type:ignore
 import requests # type:ignore
-import json 
 import base64
 import hashlib
 import secrets
