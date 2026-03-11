@@ -79,6 +79,6 @@ class Spotify():
                 self.etl.jsonToDf(file_name=ALBUMS, proc_what='albums', result=result_1),
                 self.etl.jsonToDf(file_name=ALBUMS, proc_what='albums', result=result_2),
                 self.etl.jsonToDf(file_name=ALBUMS, proc_what='albums', result=result_3),
-            ]
+            ], ignore_index=True
         )
         return album_df
