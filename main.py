@@ -9,7 +9,7 @@ def main():
     artists_df = spotify.get_artists(tracks_df=tracks_df)
     print(artists_df.head())
     albums_df = spotify.get_albums(tracks_df=tracks_df)
-    print(albums_df.head())
+    print(albums_df)
  
 if __name__ == "__main__":
     main()
