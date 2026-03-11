@@ -1,5 +1,5 @@
 import requests # type: ignore
-import pandas as pd
+import pandas as pd # type: ignore
 from get_token import Token
 from etl import ETL
 
