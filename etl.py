@@ -5,8 +5,6 @@ import requests #type:ignore
 
 class ETL():    
     def __init__(self):
-        # right off bat, making ETL class connect to database
-        # self.engine = create_engine("postgresql://dylan:wooli@localhost:5432/spotify  ")
         # for listening history processing
         self.history_dict = {}
         self.history_df = None
@@ -42,9 +40,8 @@ class ETL():
             # extract track_uri, track_id, played_at, context_type, context_uri
             self.history_dict = {
                 idx: {
-                    "id": (item.get("track") or {}).get("uri", "n/a"),
-                    "track_id": (item.get("track") or {}).get("id", "n/a"),
                     "played_at": item.get("played_at", "n/a"),
+                    "track_id": (item.get("track") or {}).get("id", "n/a"),
                     "context_type": (item.get("context") or {}).get("type", "n/a"),
                     "context_uri": (item.get("context") or {}).get("uri", "n/a")
                 }
