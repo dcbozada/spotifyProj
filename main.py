@@ -16,6 +16,9 @@ def main():
     db = DB()
     db.test_connection()
     db.create_insert_table_tracks(tracks_df=tracks_df)
+    db.create_insert_table_history(history_df=history_df)
+    db.create_insert_table_artists(artists_df=artists_df)
+    db.create_insert_table_albums(albums_df=albums_df)
             
  
 if __name__ == "__main__":
