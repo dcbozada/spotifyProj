@@ -52,7 +52,7 @@ class DB():
                 conn.commit()
                 print("Table 'tracks' created")
         except Exception as e:
-            print("Error occured with creating table 'tracks: ", e)
+            print("Error occured with creating table 'tracks': ", e)
 
         # inserting tracks_df into table 'tracks'
         # when using sql alchemy to INSERT into tables, no commit is needed
