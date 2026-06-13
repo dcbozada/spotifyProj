@@ -2,6 +2,7 @@ import requests # type: ignore
 import pandas as pd # type: ignore
 from get_token import Token
 from etl import ETL
+import json
 
 # setting json file names as global constants
 HISTORY = "listening_history.json"
@@ -27,13 +28,35 @@ class Spotify():
         return history_df
     
     def get_my_tracks(self):
-        # url is to get user 50 tracks from users liked songs playlists, only first 50
-        my_tracks_url = "https://api.spotify.com/v1/me/tracks?limit=50"
+        # first call to get total number of saved tracks
+        # only calling for 1 track so we can get the 'total' count
+        one_result = requests.get("https://api.spotify.com/v1/me/tracks",
+                                  headers=self.headers, params={"limit": 1})
+        one_result = one_result.json()
         
-        # request tracks info with GET and turn result into JSON
-        result = requests.get(my_tracks_url, headers=self.headers)
+        # setting the limit and offset to be called mutiple times in while loop
+        limit = 50
+        offset = 0
+        items=[]
+        
+        # using this while loop to gather all my tracks
+        # this works because if the offset is higher than the total
+        # in the spotify api call, it will return an empty list
+        while offset < one_result["total"]:
+            # url to get 50 tracks
+            result = requests.get("https://api.spotify.com/v1/me/tracks",
+                                  headers=self.headers, params={"limit":limit,
+                                                               "offset":offset})
+            items += result.json().get("items",[])
+            offset += limit
+
+        # # url is to get user 50 tracks from users liked songs playlists, only first 50
+        # my_tracks_url = "https://api.spotify.com/v1/me/tracks?limit=50"
+        
+        # # request tracks info with GET and turn result into JSON
+        # result = requests.get(my_tracks_url, headers=self.headers)
         tracks_df = self.etl.jsonToDf(file_name=TRACKS, proc_what='tracks',
-                             result=result)
+                             result={"items":items})
         return tracks_df
     
     def get_artists(self, tracks_df: pd.DataFrame):
