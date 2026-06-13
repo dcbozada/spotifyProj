@@ -22,21 +22,20 @@ class ETL():
     # creating this writeJson func because I am going to use it a few times
     ''' Never call to this directly in main()
        it is embedded into jsonToDF() '''
-    def w_result_to_json(self, result: requests.models.Response, file_name:str) -> str:
+    def w_result_to_json(self, result: requests.models.Response | dict, file_name:str) -> str:
         # turn the requests.models.Response to json so python reads as dict
-        result = result.json()
+        if type(result) == requests.models.Response:
+            result = result.json()
         # write json'd result to file_name
         with open(file_name, 'w') as f:
-            json.dump(result, f, indent=4)
-        return file_name
+            json.dump(result, f, indent=4)     
+        return result
 
-    def jsonToDf(self, file_name:str, proc_what: str, result: requests.models.Response) -> pd.DataFrame:
+    def jsonToDf(self, file_name: str, proc_what: str, result: requests.models.Response | dict) -> pd.DataFrame:
         # first we are going to write the Response to json
-        file_name = self.w_result_to_json(result=result, file_name=file_name)
+        result = self.w_result_to_json(result=result, file_name=file_name)
         # code that will process the listening history end point
         if proc_what == 'history':
-            with open(file_name, 'r') as f:
-                history = json.load(f)
             # extract track_uri, track_id, played_at, context_type, context_uri
             self.history_dict = {
                 idx: {
@@ -45,16 +44,13 @@ class ETL():
                     "context_type": (item.get("context") or {}).get("type", "n/a"),
                     "context_uri": (item.get("context") or {}).get("uri", "n/a")
                 }
-                for idx,item in enumerate(history.get("items") or [])
+                for idx,item in enumerate(result.get("items") or [])
             }
             # turn history_dict into history_df
             self.history_df = pd.DataFrame(self.history_dict).T
             return self.history_df
         # code that will process the tracks endpoints 
         elif proc_what == 'tracks':
-            # read the json file specified by file_name
-            with open(file_name, 'r') as f:
-                tracks = json.load(f)
             # extract only the track_id, track_name, artist_id, album_id, 
             # and duration_ms from json file and put it into self.tracks_dict
             self.tracks_dict = {
@@ -66,7 +62,7 @@ class ETL():
                     "duration_ms": (item.get("track") or {}).get("duration_ms", "n/a"),
                     "added_at": item.get("added_at", "n/a")
                 }
-                for idx, item in enumerate(tracks.get("items") or [])
+                for idx, item in enumerate(result.get("items") or [])
             }
             # turn self.tracks_dict into a dataframe
             # have to tranpose because the keys of each dict are originally the rows
@@ -74,9 +70,6 @@ class ETL():
             return self.tracks_df
         # code that will process the artists endpoint
         elif proc_what == 'artists':
-            # read the json file specified by file_name
-            with open(file_name, 'r') as f:
-                artists = json.load(f)
             # extract only the artist_id, artist_name, artist_genre,
             # artist_follwers, artist_popularity
             self.artists_dict = {
@@ -87,15 +80,12 @@ class ETL():
                     "artist_followers": (item.get("followers") or {}).get("total", "n/a"),
                     "artist_popularity": item.get("popularity", "n/a")
                 }
-                for idx,item in enumerate(artists.get("artists") or [])
+                for idx,item in enumerate(result.get("artists") or [])
             }
             self.artists_df = pd.DataFrame(self.artists_dict).T
             return self.artists_df
         # code to process albums
         elif proc_what == 'albums':
-            # open file specified with file_name
-            with open(file_name, 'r') as f:
-                albums = json.load(f)
             # extract only the album_id, name,
             # release_date, album_type, total_tracks, 
             # image_url
@@ -108,7 +98,7 @@ class ETL():
                     "total_tracks":item.get("total_tracks","n/a"),
                     "image_url":(item.get("images") or ["n/a"])[0].get("url","n/a")
                 }
-                for idx, item in enumerate(albums.get("albums") or [])
+                for idx, item in enumerate(result.get("albums") or [])
             }
             self.albums_df = pd.DataFrame(self.albums_dict).T
             return self.albums_df

@@ -2,11 +2,80 @@
     "artists": [
         {
             "external_urls": {
+                "spotify": "https://open.spotify.com/artist/4hz8tIajF2INpgM0qzPJz2"
+            },
+            "followers": {
+                "href": null,
+                "total": 1473623
+            },
+            "genres": [],
+            "href": "https://api.spotify.com/v1/artists/4hz8tIajF2INpgM0qzPJz2",
+            "id": "4hz8tIajF2INpgM0qzPJz2",
+            "images": [
+                {
+                    "url": "https://i.scdn.co/image/ab6761610000e5eb6a5725ec47b6d8c613099d74",
+                    "height": 640,
+                    "width": 640
+                },
+                {
+                    "url": "https://i.scdn.co/image/ab676161000051746a5725ec47b6d8c613099d74",
+                    "height": 320,
+                    "width": 320
+                },
+                {
+                    "url": "https://i.scdn.co/image/ab6761610000f1786a5725ec47b6d8c613099d74",
+                    "height": 160,
+                    "width": 160
+                }
+            ],
+            "name": "Rainbow Kitten Surprise",
+            "popularity": 70,
+            "type": "artist",
+            "uri": "spotify:artist:4hz8tIajF2INpgM0qzPJz2"
+        },
+        {
+            "external_urls": {
+                "spotify": "https://open.spotify.com/artist/3M7geqTs4IiGCqaAAZIQ7E"
+            },
+            "followers": {
+                "href": null,
+                "total": 62455
+            },
+            "genres": [
+                "glitch",
+                "downtempo"
+            ],
+            "href": "https://api.spotify.com/v1/artists/3M7geqTs4IiGCqaAAZIQ7E",
+            "id": "3M7geqTs4IiGCqaAAZIQ7E",
+            "images": [
+                {
+                    "url": "https://i.scdn.co/image/ab6761610000e5ebd94586e57f9920fe7f4faab4",
+                    "height": 640,
+                    "width": 640
+                },
+                {
+                    "url": "https://i.scdn.co/image/ab67616100005174d94586e57f9920fe7f4faab4",
+                    "height": 320,
+                    "width": 320
+                },
+                {
+                    "url": "https://i.scdn.co/image/ab6761610000f178d94586e57f9920fe7f4faab4",
+                    "height": 160,
+                    "width": 160
+                }
+            ],
+            "name": "Thriftworks",
+            "popularity": 39,
+            "type": "artist",
+            "uri": "spotify:artist:3M7geqTs4IiGCqaAAZIQ7E"
+        },
+        {
+            "external_urls": {
                 "spotify": "https://open.spotify.com/artist/24eDfi2MSYo3A87hCcgpIL"
             },
             "followers": {
                 "href": null,
-                "total": 494285
+                "total": 495933
             },
             "genres": [
                 "score",
@@ -47,7 +116,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 17539
+                "total": 17586
             },
             "genres": [
                 "bass music"
@@ -82,12 +151,12 @@
             },
             "followers": {
                 "href": null,
-                "total": 46191
+                "total": 46252
             },
             "genres": [
                 "dubstep",
-                "riddim",
-                "bass music"
+                "bass music",
+                "riddim"
             ],
             "href": "https://api.spotify.com/v1/artists/3EN8pUGJtYWutzf2fUxrDH",
             "id": "3EN8pUGJtYWutzf2fUxrDH",
@@ -109,7 +178,7 @@
                 }
             ],
             "name": "Moody Good",
-            "popularity": 40,
+            "popularity": 41,
             "type": "artist",
             "uri": "spotify:artist:3EN8pUGJtYWutzf2fUxrDH"
         },
@@ -119,7 +188,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 251076
+                "total": 251241
             },
             "genres": [
                 "dubstep",
@@ -159,7 +228,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 36569
+                "total": 36869
             },
             "genres": [],
             "href": "https://api.spotify.com/v1/artists/6dtbK89qIT2XjIsCQHjTxS",
@@ -182,7 +251,7 @@
                 }
             ],
             "name": "Day We Ran",
-            "popularity": 53,
+            "popularity": 54,
             "type": "artist",
             "uri": "spotify:artist:6dtbK89qIT2XjIsCQHjTxS"
         },
@@ -192,7 +261,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 148752
+                "total": 149236
             },
             "genres": [
                 "bass music"
@@ -217,7 +286,7 @@
                 }
             ],
             "name": "Of The Trees",
-            "popularity": 53,
+            "popularity": 54,
             "type": "artist",
             "uri": "spotify:artist:5V7NIXgCnX2KuQ01Bxg20c"
         },
@@ -227,7 +296,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 175783
+                "total": 175857
             },
             "genres": [
                 "indie punk",
@@ -254,7 +323,7 @@
                 }
             ],
             "name": "Cloud Nothings",
-            "popularity": 36,
+            "popularity": 37,
             "type": "artist",
             "uri": "spotify:artist:6rnbB5fuUuCSsspvFsxIpT"
         },
@@ -264,7 +333,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 1896239
+                "total": 1898094
             },
             "genres": [
                 "southern rock",
@@ -308,7 +377,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 1030339
+                "total": 1032094
             },
             "genres": [
                 "southern hip hop",
@@ -345,7 +414,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 8201
+                "total": 8224
             },
             "genres": [],
             "href": "https://api.spotify.com/v1/artists/0X7vWupejzA2A8bwITrWot",
@@ -378,7 +447,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 230758
+                "total": 231309
             },
             "genres": [
                 "dubstep",
@@ -417,7 +486,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 15715
+                "total": 15792
             },
             "genres": [],
             "href": "https://api.spotify.com/v1/artists/4BZ9qPG7EBYUfXOc9BxAle",
@@ -450,7 +519,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 1767053
+                "total": 1799622
             },
             "genres": [
                 "country"
@@ -485,7 +554,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 932796
+                "total": 936603
             },
             "genres": [
                 "country",
@@ -521,7 +590,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 305271
+                "total": 305945
             },
             "genres": [],
             "href": "https://api.spotify.com/v1/artists/7FKTg75ADVMZgY3P9ZMRtH",
@@ -554,7 +623,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 4696271
+                "total": 4707379
             },
             "genres": [],
             "href": "https://api.spotify.com/v1/artists/5p9HO3XC5P3BLxJs5Mtrhm",
@@ -587,7 +656,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 43633
+                "total": 43972
             },
             "genres": [],
             "href": "https://api.spotify.com/v1/artists/4iyP4VOGOLzbt2Vxcyu6zG",
@@ -620,7 +689,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 1111505
+                "total": 1112213
             },
             "genres": [],
             "href": "https://api.spotify.com/v1/artists/2D4FOOOtWycb3Aw9nY5n3c",
@@ -653,7 +722,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 2635577
+                "total": 2641504
             },
             "genres": [
                 "stutter house",
@@ -680,7 +749,7 @@
                 }
             ],
             "name": "Fred again..",
-            "popularity": 77,
+            "popularity": 78,
             "type": "artist",
             "uri": "spotify:artist:4oLeXFyACqeem2VImYeBFe"
         },
@@ -690,7 +759,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 12687
+                "total": 12788
             },
             "genres": [
                 "reggae"
@@ -725,7 +794,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 9563494
+                "total": 9574730
             },
             "genres": [
                 "emo rap",
@@ -764,7 +833,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 9563494
+                "total": 9574730
             },
             "genres": [
                 "emo rap",
@@ -803,7 +872,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 25357
+                "total": 25456
             },
             "genres": [],
             "href": "https://api.spotify.com/v1/artists/7ig7r3UikvL9qJe7pQvCBn",
@@ -836,7 +905,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 2318408
+                "total": 2321697
             },
             "genres": [],
             "href": "https://api.spotify.com/v1/artists/6zO1dZ40fTZ5hY9NnnRJSk",
@@ -869,7 +938,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 148752
+                "total": 149236
             },
             "genres": [
                 "bass music"
@@ -894,7 +963,7 @@
                 }
             ],
             "name": "Of The Trees",
-            "popularity": 53,
+            "popularity": 54,
             "type": "artist",
             "uri": "spotify:artist:5V7NIXgCnX2KuQ01Bxg20c"
         },
@@ -904,7 +973,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 232358
+                "total": 232442
             },
             "genres": [
                 "future bass"
@@ -939,7 +1008,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 36569
+                "total": 36869
             },
             "genres": [],
             "href": "https://api.spotify.com/v1/artists/6dtbK89qIT2XjIsCQHjTxS",
@@ -962,7 +1031,7 @@
                 }
             ],
             "name": "Day We Ran",
-            "popularity": 53,
+            "popularity": 54,
             "type": "artist",
             "uri": "spotify:artist:6dtbK89qIT2XjIsCQHjTxS"
         },
@@ -972,7 +1041,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 2031508
+                "total": 2033668
             },
             "genres": [
                 "retro soul"
@@ -1007,7 +1076,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 205596
+                "total": 205954
             },
             "genres": [
                 "soundtrack",
@@ -1044,7 +1113,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 143247
+                "total": 143391
             },
             "genres": [
                 "dubstep",
@@ -1082,7 +1151,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 2635577
+                "total": 2641504
             },
             "genres": [
                 "stutter house",
@@ -1109,7 +1178,7 @@
                 }
             ],
             "name": "Fred again..",
-            "popularity": 77,
+            "popularity": 78,
             "type": "artist",
             "uri": "spotify:artist:4oLeXFyACqeem2VImYeBFe"
         },
@@ -1119,7 +1188,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 373735
+                "total": 375359
             },
             "genres": [
                 "stutter house"
@@ -1154,7 +1223,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 747570
+                "total": 751049
             },
             "genres": [
                 "house",
@@ -1190,7 +1259,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 2252468
+                "total": 2256664
             },
             "genres": [
                 "yacht rock",
@@ -1227,7 +1296,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 2237937
+                "total": 2240086
             },
             "genres": [
                 "new jack swing",
@@ -1269,7 +1338,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 6919
+                "total": 6946
             },
             "genres": [
                 "riddim",
@@ -1307,7 +1376,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 6919
+                "total": 6946
             },
             "genres": [
                 "riddim",
@@ -1345,7 +1414,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 6919
+                "total": 6946
             },
             "genres": [
                 "riddim",
@@ -1383,7 +1452,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 6919
+                "total": 6946
             },
             "genres": [
                 "riddim",
@@ -1421,7 +1490,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 2438
+                "total": 2456
             },
             "genres": [
                 "riddim",
@@ -1457,7 +1526,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 98553
+                "total": 99079
             },
             "genres": [
                 "stutter house"
@@ -1492,7 +1561,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 11879
+                "total": 11911
             },
             "genres": [
                 "dubstep",
@@ -1521,7 +1590,7 @@
                 }
             ],
             "name": "Abstrakt Sonance",
-            "popularity": 33,
+            "popularity": 34,
             "type": "artist",
             "uri": "spotify:artist:00qKBesewdWy5l0bpMdosp"
         },
@@ -1531,7 +1600,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 2635577
+                "total": 2641504
             },
             "genres": [
                 "stutter house",
@@ -1558,7 +1627,7 @@
                 }
             ],
             "name": "Fred again..",
-            "popularity": 77,
+            "popularity": 78,
             "type": "artist",
             "uri": "spotify:artist:4oLeXFyACqeem2VImYeBFe"
         },
@@ -1568,7 +1637,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 16578
+                "total": 16640
             },
             "genres": [],
             "href": "https://api.spotify.com/v1/artists/7jpG13xu7wCcAixo3DuOvD",
@@ -1601,7 +1670,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 119
+                "total": 120
             },
             "genres": [],
             "href": "https://api.spotify.com/v1/artists/7CljRNPzZ1SLCVP0XeYj9v",
@@ -1624,7 +1693,7 @@
                 }
             ],
             "name": "D:Form",
-            "popularity": 8,
+            "popularity": 7,
             "type": "artist",
             "uri": "spotify:artist:7CljRNPzZ1SLCVP0XeYj9v"
         },
@@ -1634,7 +1703,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 296089
+                "total": 296740
             },
             "genres": [],
             "href": "https://api.spotify.com/v1/artists/7CzURHjIfP0ClUnjVRyF1i",
@@ -1667,7 +1736,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 827704
+                "total": 829848
             },
             "genres": [],
             "href": "https://api.spotify.com/v1/artists/0lJlKQvuM2Sd9DPPyUXcHg",
@@ -1700,7 +1769,7 @@
             },
             "followers": {
                 "href": null,
-                "total": 13869549
+                "total": 13891667
             },
             "genres": [
                 "old school hip hop",
@@ -1736,72 +1805,6 @@
             "popularity": 77,
             "type": "artist",
             "uri": "spotify:artist:5me0Irg2ANcsgc93uaYrpb"
-        },
-        {
-            "external_urls": {
-                "spotify": "https://open.spotify.com/artist/1He0ZKninbT4FMEV9hUZKn"
-            },
-            "followers": {
-                "href": null,
-                "total": 101181
-            },
-            "genres": [],
-            "href": "https://api.spotify.com/v1/artists/1He0ZKninbT4FMEV9hUZKn",
-            "id": "1He0ZKninbT4FMEV9hUZKn",
-            "images": [
-                {
-                    "url": "https://i.scdn.co/image/ab6761610000e5ebe0cb2500b8e3c3acc19c01e3",
-                    "height": 640,
-                    "width": 640
-                },
-                {
-                    "url": "https://i.scdn.co/image/ab67616100005174e0cb2500b8e3c3acc19c01e3",
-                    "height": 320,
-                    "width": 320
-                },
-                {
-                    "url": "https://i.scdn.co/image/ab6761610000f178e0cb2500b8e3c3acc19c01e3",
-                    "height": 160,
-                    "width": 160
-                }
-            ],
-            "name": "Mindchatter",
-            "popularity": 46,
-            "type": "artist",
-            "uri": "spotify:artist:1He0ZKninbT4FMEV9hUZKn"
-        },
-        {
-            "external_urls": {
-                "spotify": "https://open.spotify.com/artist/7CzURHjIfP0ClUnjVRyF1i"
-            },
-            "followers": {
-                "href": null,
-                "total": 296089
-            },
-            "genres": [],
-            "href": "https://api.spotify.com/v1/artists/7CzURHjIfP0ClUnjVRyF1i",
-            "id": "7CzURHjIfP0ClUnjVRyF1i",
-            "images": [
-                {
-                    "url": "https://i.scdn.co/image/ab6761610000e5ebfdc404f79554bb227603eb9e",
-                    "height": 640,
-                    "width": 640
-                },
-                {
-                    "url": "https://i.scdn.co/image/ab67616100005174fdc404f79554bb227603eb9e",
-                    "height": 320,
-                    "width": 320
-                },
-                {
-                    "url": "https://i.scdn.co/image/ab6761610000f178fdc404f79554bb227603eb9e",
-                    "height": 160,
-                    "width": 160
-                }
-            ],
-            "name": "Derik Fein",
-            "popularity": 54,
-            "type": "artist",
-            "uri": "spotify:artist:7CzURHjIfP0ClUnjVRyF1i"
         }
     ]
 }

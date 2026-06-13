@@ -40,7 +40,7 @@ class DB():
         tracks_name VARCHAR,
         artist_id VARCHAR,
         album_id VARCHAR,
-        duration_ms VARCHAR,
+        duration_ms INTEGER,
         added_at VARCHAR)"""
 
         # create tracks table
