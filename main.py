@@ -8,6 +8,11 @@ def main():
     artists_df = spotify.get_artists(tracks_df=tracks_df)
     albums_df = spotify.get_albums(tracks_df=tracks_df)
 
+    print(len(history_df.index))
+    print(len(tracks_df.index))
+    print(len(artists_df.index))
+    print(len(albums_df.index))
+
     db = DB()
     db.test_connection()
     db.create_insert_table_tracks(tracks_df=tracks_df)

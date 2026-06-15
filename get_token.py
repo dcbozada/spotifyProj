@@ -143,11 +143,11 @@ class Token():
             token_data = response.json() # convert response.Response object to json so python reads as dict
             # write the newly generated access_token and refresh_token to .env file
             dotenv.set_key(dotenv_file, "ACCESS_TOKEN", token_data["access_token"])
-            dotenv.set_key(dotenv_file, "REFRESH_TOKEN", token_data["refresh_token"])
+            dotenv.set_key(dotenv_file, "REFRESH_TOKEN", token_data.get("refresh_token",self.refresh_token))
             print('From get_refresh_token(): ACCESS_TOKEN and REFRESH_TOKEN updated in .env')
             # write the newly generated access_token and refresh_token to instance token vars
             # self.access_token = token_data["access_token"]
-            self.refresh_token = token_data["refresh_token"]
+            # self.refresh_token = token_data["refresh_token"]
             return token_data["access_token"]
         except Exception as e:
             print(f"\nRefresh Token Request Failed: {e}")
