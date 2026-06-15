@@ -1,5 +1,2 @@
 .env
-albums.json
-artists.json
-tracks.json
-listening_history.json
+*.json
