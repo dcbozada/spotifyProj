@@ -5,9 +5,10 @@ A Python pipeline that pulls your Spotify listening data from the Spotify API an
 ## What It Does
 
 - Fetches your 50 most recently played tracks
-- Fetches your 50 saved/liked tracks with artist and album details
+- Fetches **all** of your saved/liked tracks via paginated API calls
+- Fetches artist and album details for every saved track, batched to respect API limits
 - Transforms the raw API responses into structured DataFrames
-- Loads the data into a PostgreSQL database
+- Loads the data into a PostgreSQL database across 4 tables
 
 ## Prerequisites
 
@@ -77,8 +78,17 @@ Spotify API → raw JSON files → pandas DataFrames → PostgreSQL
 
 ## Database
 
-Data is loaded into a PostgreSQL database running in Docker. Current table:
+Data is loaded into a PostgreSQL database running in Docker. All 4 tables are dropped and recreated on each run.
 
-| Table    | Columns                                                                         |
-|----------|---------------------------------------------------------------------------------|
-| `tracks` | `tracks_id`, `tracks_name`, `artist_id`, `album_id`, `duration_ms`, `added_at` |
+| Table     | Columns                                                                          |
+|-----------|----------------------------------------------------------------------------------|
+| `tracks`  | `tracks_id`, `tracks_name`, `artist_id`, `album_id`, `duration_ms`, `added_at`  |
+| `history` | `played_at`, `track_id`, `context_type`, `context_uri`                           |
+| `artists` | `artist_id`, `artist_name`, `artist_genre`, `artist_followers`, `artist_popularity` |
+| `albums`  | `album_id`, `name`, `release_date`, `album_type`, `total_tracks`, `image_url`   |
+
+### Querying the database
+
+```powershell
+docker exec -it <DB_CONTAINER_NAME> psql -U <POSTGRES_USER> -d <POSTGRES_DB>
+```

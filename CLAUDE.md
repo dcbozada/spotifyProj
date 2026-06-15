@@ -17,21 +17,23 @@ Five-file pipeline with clear separation of concerns:
 - **`get_token.py`** — `Token` class handles Spotify OAuth2 with PKCE. Reads/writes `ACCESS_TOKEN` and `REFRESH_TOKEN` to `.env`. Validates the current token on each run and refreshes if expired (HTTP 401).
 - **`api.py`** — `Spotify` class. Owns all HTTP calls to the Spotify API. Methods: `get_history()`, `get_my_tracks()`, `get_artists(tracks_df)`, `get_albums(tracks_df)`. Each method calls the relevant endpoint, passes the raw response to `ETL.jsonToDf()`, and returns a DataFrame.
 - **`etl.py`** — `ETL` class with `w_result_to_json()` (writes raw API response to disk) and `jsonToDf(file_name, proc_what, result)` (writes JSON → reads JSON → returns a pandas DataFrame). The `proc_what` parameter accepts `'history'`, `'tracks'`, `'artists'`, or `'albums'`.
-- **`db.py`** — `DB` class. Owns all PostgreSQL interactions via SQLAlchemy. Reads credentials from `.env`. Methods: `test_connection()` (runs `SELECT 1` to verify the DB is reachable), `create_insert_table_tracks(tracks_df)` (drops/recreates the `tracks` table and loads the DataFrame into it via `to_sql()`).
-- **`main.py`** — Entry point. Instantiates `Spotify()` and calls its four methods in sequence, then instantiates `DB()` and calls `test_connection()` and `create_insert_table_tracks()`.
+- **`db.py`** — `DB` class. Owns all PostgreSQL interactions via SQLAlchemy. Reads credentials from `.env`. Methods: `test_connection()` (runs `SELECT 1` to verify the DB is reachable), `create_insert_table_tracks()`, `create_insert_table_history()`, `create_insert_table_artists()`, `create_insert_table_albums()` — each drops/recreates its table and loads the DataFrame via `to_sql()`.
+- **`main.py`** — Entry point. Instantiates `Spotify()` and calls its four methods in sequence, then instantiates `DB()` and calls `test_connection()` followed by all four `create_insert_table_*()` methods.
 
 ## Data Flow
 
 1. Spotify API → raw JSON files (`listening_history.json`, `tracks.json`, `artists.json`, `albums.json`)
 2. JSON files → pandas DataFrames via `ETL.jsonToDf()`
-3. DataFrames → PostgreSQL via `DB.create_insert_table_tracks(tracks_df)`
+3. DataFrames → PostgreSQL via `DB.create_insert_table_tracks()`, `create_insert_table_history()`, `create_insert_table_artists()`, `create_insert_table_albums()`
 
-### Albums endpoint note
-The Spotify `/albums` endpoint has a max of 20 IDs per request. `get_albums()` splits the 50 tracks across three batched requests and concatenates the results with `pd.concat(..., ignore_index=True)`.
+### API batching notes
+- `get_my_tracks()` paginates through the full saved tracks library using a while loop with `limit=50` and an incrementing `offset`, stopping when the offset exceeds the total track count returned by the API.
+- `get_artists()` batches up to 50 IDs per request using a `chunks()` generator. Results are accumulated into `all_artists` and passed to `ETL.jsonToDf()` once after the loop.
+- `get_albums()` batches up to 20 IDs per request (Spotify's max for this endpoint) using the same `chunks()` pattern. Results are accumulated into `all_albums` and passed to `ETL.jsonToDf()` once after the loop.
 
 ## Database
 
-PostgreSQL running in Docker — credentials are loaded from `.env`. Current active table: `tracks`. SQLAlchemy is used for the DB layer via the `DB` class in `db.py`. The `create_insert_table_tracks()` method uses `DROP TABLE IF EXISTS` + `CREATE TABLE` then `DataFrame.to_sql()` with `if_exists='replace'`.
+PostgreSQL running in Docker — credentials are loaded from `.env`. Active tables: `tracks`, `history`, `artists`, `albums`. SQLAlchemy is used for the DB layer via the `DB` class in `db.py`. Each `create_insert_table_*()` method uses `DROP TABLE IF EXISTS` + `CREATE TABLE` then `DataFrame.to_sql()` with `if_exists='replace'`.
 
 ### Starting the database (Docker)
 
